@@ -58,7 +58,7 @@ export class SpotService {
     async remove(id: string): Promise<void> {
         const spot = await this.findOne(id);
 
-        await this.spotRepository.save(spot);
+        await this.spotRepository.remove(spot);
     }
 
 }
