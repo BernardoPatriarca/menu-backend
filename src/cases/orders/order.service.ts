@@ -71,7 +71,10 @@ export class OrderService {
   }
 
   async findAll(): Promise<Order[]> {
-      const order = await this.orderRepository.find();
+      const order = await this.orderRepository.find({
+          relations: { guestCheck: { spot: true }, items: { product: true } },
+          order: { createdAt: 'DESC' }
+      });
 
       if (!order) {
           throw new NotFoundException('Comanda não encontrada.');
